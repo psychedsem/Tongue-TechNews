@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tongue: tech news da Hacker News, informazione digitale ed eventi dedicati a sostenibilità e community."
+    />
+    <meta name="theme-color" content="#0D0208" />
+    <link rel="icon" type="image/png" href="/img/tongue-logo.png" />
+    <title>Tongue // Tech News</title>
+  </head>
+  <body>
+    <nav id="site-nav" class="site-nav" aria-label="Navigazione principale">
+      <div class="site-nav__inner">
+        <div class="site-nav__side site-nav__side--left">
+          <span class="nav-status nav-status--live">
+            <span class="nav-status__dot" aria-hidden="true"></span>
+            <span>LIVE FEED</span>
+          </span>
+
+          <a class="nav-brand" href="#home" aria-label="Tongue - torna alla home">
+            <img src="/img/tongue-logo.png" alt="" width="1845" height="437" />
+          </a>
+        </div>
+
+        <div class="site-nav__links" aria-label="Sezioni del sito">
+          <a class="site-nav__link is-active" href="#home" data-section="home">HOME</a>
+          <a class="site-nav__link" href="#about" data-section="about">CHI SIAMO</a>
+          <a class="site-nav__link" href="#events" data-section="events">EVENTI</a>
+        </div>
+
+        <div class="site-nav__side site-nav__side--right">
+          <span class="nav-status nav-status--signal">SIGNAL ONLINE</span>
+          <a
+            class="instagram-link"
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="Apri Instagram - link dimostrativo"
+            title="Link Instagram dimostrativo"
+          >
+            <img
+              src="/img/instagram-logo.png"
+              alt="Instagram"
+              width="1080"
+              height="1080"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="site-nav__divider" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <div class="site-shell">
+      <header id="home" class="hero page-section" aria-labelledby="page-title">
+        <div class="hero__brand-row">
+          <div class="hero__logo-frame" aria-label="Tongue">
+            <span class="hero__beam hero__beam--left" aria-hidden="true"></span>
+            <img
+              class="hero__logo"
+              src="/img/tongue-logo.png"
+              alt="Tongue"
+              width="1845"
+              height="437"
+            />
+            <span class="hero__beam hero__beam--right" aria-hidden="true"></span>
+          </div>
+
+          <div class="hero__copy">
+            <p class="hero__kicker">// INFORMATION SHOULD MOVE FAST</p>
+            <h1 id="page-title"><span>TECH</span> <span>NEWS</span></h1>
+          </div>
+        </div>
+
+        <p class="hero__lede">
+          Le ultime notizie dal mondo tech, recuperate da Hacker News e ordinate in un feed
+          essenziale, veloce e sempre aggiornato.
+        </p>
+
+        <div class="hero__rule" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </header>
+
+      <main>
+        <section id="news" class="feed content-section" aria-labelledby="feed-heading">
+          <div class="feed__header">
+            <div>
+              <p class="section-label">// LATEST TRANSMISSIONS</p>
+              <h2 id="feed-heading">Ultime news</h2>
+            </div>
+
+            <div class="feed-status" aria-live="polite">
+              <span class="feed-status__label">STORIES LOADED</span>
+              <strong id="loaded-count">00</strong>
+              <span class="feed-status__divider">/</span>
+              <span id="total-count">---</span>
+            </div>
+          </div>
+
+          <div id="status-region" class="status-region" role="status" aria-live="polite"></div>
+
+          <div class="feed-frame">
+            <section
+              id="news-list"
+              class="news-list"
+              aria-label="Elenco delle ultime notizie tech"
+            ></section>
+          </div>
+
+          <div class="feed-actions">
+            <div class="load-more-panel">
+              <button id="load-more" class="load-more" type="button" disabled>
+                <span class="load-more__label">LOAD MORE</span>
+                <span class="load-more__count">+10</span>
+              </button>
+
+              <div class="batch-control" aria-label="Numero di news da caricare">
+                <label class="batch-control__label" for="news-batch-size">BATCH</label>
+                <select id="news-batch-size" class="batch-control__select">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="custom">CUSTOM</option>
+                </select>
+                <div id="news-custom-wrap" class="batch-control__custom" hidden>
+                  <label class="sr-only" for="news-custom-size">Numero personalizzato di news</label>
+                  <input
+                    id="news-custom-size"
+                    class="batch-control__input"
+                    type="number"
+                    min="1"
+                    max="50"
+                    step="1"
+                    value="10"
+                    inputmode="numeric"
+                  />
+                  <span>MAX 50</span>
+                </div>
+              </div>
+            </div>
+
+            <button id="retry-feed" class="retry-button" type="button" hidden>
+              RETRY CONNECTION
+            </button>
+          </div>
+        </section>
+
+        <section id="about" class="content-section page-section" aria-labelledby="about-heading">
+          <div class="section-heading section-heading--left">
+            <p class="section-label">// WHO WE ARE</p>
+            <h2 id="about-heading">Chi siamo</h2>
+          </div>
+
+          <article class="about-card panel-card">
+            <div class="about-card__marker" aria-hidden="true">01</div>
+            <div class="about-card__content">
+              <p>
+                Tongue nasce su Instagram dall'incontro tra una giornalista e lo YouTuber
+                <strong>Simon Lanches</strong>, con l'obiettivo di rendere l'informazione più immediata,
+                comprensibile e accessibile. Quello che inizialmente era un progetto editoriale social è
+                cresciuto fino a diventare una vera azienda, oggi composta da oltre 50 collaboratori.
+              </p>
+              <p>
+                Il cuore del progetto è una comunicazione diretta, veloce ma completa. I temi più
+                rilevanti dell'attualità vengono trasformati in contenuti pensati per essere fruiti con
+                facilità, senza perdere il contesto. La community di Tongue conta quasi 3 milioni di
+                follower su
+                <a
+                  class="inline-link"
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >Instagram ↗</a>, e ogni settimana ospita esperti, professionisti e organizzazioni per
+                approfondire innovazione, sostenibilità ambientale e impatto sociale.
+              </p>
+              <p>
+                L'attività di Tongue non si ferma allo schermo: incontri, conferenze, iniziative
+                sostenibili e swap party trasformano la community digitale in partecipazione reale.
+              </p>
+
+              <a class="section-cta" href="#events">SCOPRI GLI EVENTI <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </section>
+
+        <section id="events" class="content-section page-section" aria-labelledby="events-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">// FROM FEED TO REAL LIFE</p>
+              <h2 id="events-heading">Eventi</h2>
+            </div>
+            <p class="section-heading__note">ONLINE / LIVE / COMMUNITY</p>
+          </div>
+
+          <div class="events-intro-grid">
+            <article class="panel-card info-card">
+              <p class="info-card__eyebrow">TONGUE EVENTS</p>
+              <h3>Informazione che diventa esperienza.</h3>
+              <p>
+                Tongue porta i temi della propria community anche fuori dai social, organizzando eventi
+                online e dal vivo dedicati a impatto sociale, sostenibilità e partecipazione collettiva.
+                Talk, incontri con esperti e iniziative plastic-free trasformano informazione e
+                consapevolezza in esperienze concrete.
+              </p>
+            </article>
+
+            <article class="panel-card info-card info-card--feature">
+              <p class="info-card__eyebrow">FEATURED FORMAT</p>
+              <h3>Swap Party</h3>
+              <p>
+                Gli Swap Party di Tongue sono eventi dedicati allo scambio di vestiti e oggetti di
+                seconda mano: nuova vita a ciò che già esiste, meno sprechi e più socialità.
+              </p>
+            </article>
+          </div>
+
+          <div class="events-list-heading">
+            <div>
+              <p class="section-label">// UPCOMING SESSIONS</p>
+              <h3>Prossimi eventi</h3>
+            </div>
+            <span>
+              <strong id="events-loaded-count">05</strong>
+              /
+              <span id="events-total-count">15</span>
+              EVENTS · EU + UK
+            </span>
+          </div>
+
+          <div id="events-list" class="events-list" aria-label="Elenco dei prossimi eventi"></div>
+
+          <div class="feed-actions events-actions">
+            <div class="load-more-panel">
+              <button id="events-load-more" class="load-more" type="button">
+                <span class="load-more__label">LOAD MORE</span>
+                <span class="load-more__count">+10</span>
+              </button>
+
+              <div class="batch-control" aria-label="Numero di eventi da caricare">
+                <label class="batch-control__label" for="events-batch-size">BATCH</label>
+                <select id="events-batch-size" class="batch-control__select">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="custom">CUSTOM</option>
+                </select>
+                <div id="events-custom-wrap" class="batch-control__custom" hidden>
+                  <label class="sr-only" for="events-custom-size">Numero personalizzato di eventi</label>
+                  <input
+                    id="events-custom-size"
+                    class="batch-control__input"
+                    type="number"
+                    min="1"
+                    max="50"
+                    step="1"
+                    value="10"
+                    inputmode="numeric"
+                  />
+                  <span>MAX 50</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <strong>TONGUE</strong>
+          <span>TECH NEWS / EVENTS / COMMUNITY</span>
+        </div>
+        <div class="site-footer__links">
+          <a href="#home">HOME ↑</a>
+          <a
+            href="https://github.com/HackerNews/API"
+            target="_blank"
+            rel="noreferrer noopener"
+          >TECH NEWS POWERED BY HACKER NEWS ↗</a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >INSTAGRAM ↗</a>
+        </div>
+        <span class="site-footer__copyright">© 2026 TONGUE - DEMO PROJECT</span>
+      </footer>
+    </div>
+
+    <div id="demo-toast" class="demo-toast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>
