@@ -84,3 +84,9 @@ Il selettore accanto a `Load more` propone 10, 20 e 50 elementi. Con `CUSTOM` si
 - Gli eventi e le relative registrazioni sono fittizi e servono esclusivamente a rappresentare il brief.
 - I luoghi indicati negli eventi sono città e regioni reali dell'UE o del Regno Unito.
 - Il link Instagram è dimostrativo e non rappresenta una pagina reale di Tongue.
+
+## Contatti
+
+Per informazioni sul progetto o per entrare in contatto con me:
+
+- LinkedIn: [Simone "Sem"](https://www.linkedin.com/in/simone-sem/)
