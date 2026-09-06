@@ -123,9 +123,3 @@ Se restano meno elementi del batch richiesto, l'app mostra soltanto quelli ancor
 Per informazioni sul progetto o per entrare in contatto con me:
 
 - LinkedIn: [Simone "Sem"](https://www.linkedin.com/in/simone-sem/)
-
-<<<<<<< HEAD
-- LinkedIn: [Simone "Sem"](https://www.linkedin.com/in/simone-sem/)
-=======
-- LinkedIn: [Simone "Sem"](https://www.linkedin.com/in/simone-sem/)
->>>>>>> f4e3b9c (Apply final review improvements)
