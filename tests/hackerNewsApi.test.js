@@ -23,21 +23,21 @@ describe('Hacker News API service', () => {
     getMock.mockReset();
   });
 
-  it('recupera la lista di id da newstories', async () => {
+  it('fetches the ID list from newstories', async () => {
     getMock.mockResolvedValueOnce({ data: [101, 102, 103] });
 
     await expect(fetchNewStoryIds()).resolves.toEqual([101, 102, 103]);
     expect(getMock).toHaveBeenCalledWith('/newstories.json');
   });
 
-  it('costruisce correttamente la chiamata di dettaglio per un id', async () => {
+  it('builds the story detail request correctly for an ID', async () => {
     getMock.mockResolvedValueOnce({ data: { id: 27933223, title: 'Story' } });
 
     await expect(fetchStoryById(27933223)).resolves.toMatchObject({ id: 27933223 });
     expect(getMock).toHaveBeenCalledWith('/item/27933223.json');
   });
 
-  it('mantiene le story valide anche se una richiesta del batch fallisce', async () => {
+  it('keeps valid stories when one request in the batch fails', async () => {
     getMock.mockImplementation((path) => {
       if (path === '/item/2.json') {
         return Promise.reject(new Error('Network error'));
@@ -53,7 +53,7 @@ describe('Hacker News API service', () => {
     expect(result.failedIds).toEqual([2]);
   });
 
-  it('esclude item eliminati o marcati come dead dal batch', async () => {
+  it('excludes deleted or dead items from the batch', async () => {
     getMock.mockImplementation((path) => {
       const id = Number(path.match(/\d+/)?.[0]);
 

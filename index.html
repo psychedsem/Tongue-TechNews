@@ -121,7 +121,10 @@
               </button>
 
               <div class="batch-control" aria-label="Numero di news da caricare">
-                <label class="batch-control__label" for="news-batch-size">BATCH</label>
+                <label class="batch-control__label" for="news-batch-size">
+                  <span>BATCH</span>
+                  <strong class="batch-control__limit">MAX 50</strong>
+                </label>
                 <select id="news-batch-size" class="batch-control__select">
                   <option value="10" selected>10</option>
                   <option value="20">20</option>
@@ -243,7 +246,10 @@
               </button>
 
               <div class="batch-control" aria-label="Numero di eventi da caricare">
-                <label class="batch-control__label" for="events-batch-size">BATCH</label>
+                <label class="batch-control__label" for="events-batch-size">
+                  <span>BATCH</span>
+                  <strong class="batch-control__limit">MAX 50</strong>
+                </label>
                 <select id="events-batch-size" class="batch-control__select">
                   <option value="10" selected>10</option>
                   <option value="20">20</option>

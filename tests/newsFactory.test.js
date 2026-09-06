@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { NewsFactory } from '../src/js/factory.js';
 
 describe('NewsFactory', () => {
-  it('normalizza una story Hacker News in un oggetto pronto per la UI', () => {
+  it('normalizes a Hacker News story into a UI-ready object', () => {
     const news = NewsFactory.create({
       id: 123,
       title: '  A test story  ',
@@ -20,7 +20,7 @@ describe('NewsFactory', () => {
     expect(news.publishedLabel).toContain('2024');
   });
 
-  it('usa la discussione Hacker News come fallback quando manca url', () => {
+  it('uses the Hacker News discussion as fallback when the URL is missing', () => {
     const news = NewsFactory.create({
       id: 456,
       title: 'Ask HN example',
@@ -31,7 +31,7 @@ describe('NewsFactory', () => {
     expect(news.source).toBe('news.ycombinator.com');
   });
 
-  it('gestisce un timestamp non valido senza rompere il rendering', () => {
+  it('handles an invalid timestamp without breaking rendering', () => {
     const news = NewsFactory.create({
       id: 789,
       title: 'Story without date',
@@ -42,7 +42,7 @@ describe('NewsFactory', () => {
     expect(news.publishedLabel).toBe('Data non disponibile');
   });
 
-  it('rifiuta una news senza id valido', () => {
+  it('rejects a news item without a valid ID', () => {
     expect(() => NewsFactory.create({ title: 'Broken item' })).toThrow(TypeError);
   });
 });

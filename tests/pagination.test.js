@@ -4,7 +4,7 @@ import { getNextBatch } from '../src/js/utils.js';
 describe('getNextBatch', () => {
   const ids = Array.from({ length: 25 }, (_, index) => index + 1);
 
-  it('restituisce i primi 10 elementi e il prossimo indice', () => {
+  it('returns the first 10 items and the next index', () => {
     expect(getNextBatch(ids, 0, 10)).toEqual({
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       nextIndex: 10,
@@ -12,7 +12,7 @@ describe('getNextBatch', () => {
     });
   });
 
-  it('restituisce un ultimo blocco più corto senza superare la lista', () => {
+  it('returns a shorter final batch without exceeding the list', () => {
     expect(getNextBatch(ids, 20, 10)).toEqual({
       items: [21, 22, 23, 24, 25],
       nextIndex: 25,
@@ -20,7 +20,7 @@ describe('getNextBatch', () => {
     });
   });
 
-  it('rifiuta un batch size non valido', () => {
+  it('rejects an invalid batch size', () => {
     expect(() => getNextBatch(ids, 0, 0)).toThrow(RangeError);
   });
 });
