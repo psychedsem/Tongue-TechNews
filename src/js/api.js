@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const apiBaseUrl =
+  import.meta.env.VITE_API_BASE_URL || 'https://hacker-news.firebaseio.com/v0';
+
 const api = axios.create({
-  baseURL: 'https://hacker-news.firebaseio.com/v0',
+  baseURL: apiBaseUrl,
   timeout: 10000,
 });
 
