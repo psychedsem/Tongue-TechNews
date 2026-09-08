@@ -1,6 +1,15 @@
+import * as Sentry from '@sentry/browser';
+
 import '../css/style.css';
 import { initEventsFeed } from './events.js';
 import { initNewsFeed } from './news.js';
+
+if (import.meta.env.VITE_SENTRY_DSN) {
+  Sentry.init({
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    environment: import.meta.env.MODE,
+  });
+}
 
 function initNavigation() {
   const nav = document.querySelector('#site-nav');

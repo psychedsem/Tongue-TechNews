@@ -70,6 +70,8 @@ jobs:
         run: npm ci
 
       - name: Build for GitHub Pages
+        env:
+          VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
         run: npm run build -- --base=/Tongue-TechNews/
 
       - name: Upload GitHub Pages artifact
