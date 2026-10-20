@@ -1,19 +1,21 @@
-const dateFormatter = new Intl.DateTimeFormat('it-IT', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false,
-  timeZone: 'Europe/Rome',
-});
+function getDateFormatter(language = 'it') {
+  return new Intl.DateTimeFormat(language === 'en' ? 'en-GB' : 'it-IT', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Europe/Rome',
+  });
+}
 
-export function formatUnixDate(unixSeconds) {
+export function formatUnixDate(unixSeconds, language = 'it') {
   if (!unixSeconds || Number.isNaN(Number(unixSeconds))) {
-    return 'Data non disponibile';
+    return language === 'en' ? 'Date unavailable' : 'Data non disponibile';
   }
 
-  return dateFormatter.format(new Date(Number(unixSeconds) * 1000));
+  return getDateFormatter(language).format(new Date(Number(unixSeconds) * 1000));
 }
 
 export function getHostname(url) {

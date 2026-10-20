@@ -42,6 +42,17 @@ describe('NewsFactory', () => {
     expect(news.publishedLabel).toBe('Data non disponibile');
   });
 
+  it('localizes fallback copy for the English version', () => {
+    const news = NewsFactory.create({
+      id: 790,
+      title: '',
+      time: null,
+    }, 'en');
+
+    expect(news.title).toBe('Title unavailable');
+    expect(news.publishedLabel).toBe('Date unavailable');
+  });
+
   it('rejects a news item without a valid ID', () => {
     expect(() => NewsFactory.create({ title: 'Broken item' })).toThrow(TypeError);
   });

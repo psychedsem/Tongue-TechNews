@@ -1,5 +1,6 @@
 import { fetchNewStoryIds, fetchStoriesByIds } from './api.js';
 import { NewsFactory } from './factory.js';
+import { getCopy, getLanguageFromPath } from './i18n.js';
 import { getNextBatch, getVisibleBatchSize, normalizeBatchSize } from './utils.js';
 
 const INITIAL_BATCH_SIZE = 10;
@@ -21,7 +22,7 @@ function createMetaItem(label, value) {
   return item;
 }
 
-function createNewsCard(news, position) {
+function createNewsCard(news, position, copy) {
   const article = document.createElement('article');
   article.className = 'news-card';
 
@@ -46,8 +47,8 @@ function createNewsCard(news, position) {
   const metadata = document.createElement('div');
   metadata.className = 'news-card__meta';
   metadata.append(
-    createMetaItem('PUBBLICATA', news.publishedLabel),
-    createMetaItem('SOURCE', news.source),
+    createMetaItem(copy.news.published, news.publishedLabel),
+    createMetaItem(copy.news.source, news.source),
   );
 
   body.append(title, metadata);
@@ -57,18 +58,18 @@ function createNewsCard(news, position) {
   action.href = news.url;
   action.target = '_blank';
   action.rel = 'noreferrer noopener';
-  action.setAttribute('aria-label', `Apri la news: ${news.title}`);
+  action.setAttribute('aria-label', copy.news.openAria(news.title));
   action.innerHTML = '<span>READ</span><span aria-hidden="true">↗</span>';
 
   article.append(index, body, action);
   return article;
 }
 
-function renderNews(container, newsItems, startPosition) {
+function renderNews(container, newsItems, startPosition, copy) {
   const fragment = document.createDocumentFragment();
 
   newsItems.forEach((news, index) => {
-    fragment.append(createNewsCard(news, startPosition + index));
+    fragment.append(createNewsCard(news, startPosition + index, copy));
   });
 
   container.append(fragment);
@@ -100,6 +101,8 @@ function clearSkeletons(container) {
 }
 
 export function initNewsFeed() {
+  const language = getLanguageFromPath(window.location.pathname) || 'en';
+  const copy = getCopy(language);
   const newsList = document.querySelector('#news-list');
   const loadMoreButton = document.querySelector('#load-more');
   const retryButton = document.querySelector('#retry-feed');
@@ -146,7 +149,7 @@ export function initNewsFeed() {
 
     const label = loadMoreButton.querySelector('.load-more__label');
     const countNode = loadMoreButton.querySelector('.load-more__count');
-    label.textContent = isLoading ? 'LOADING' : 'LOAD MORE';
+    label.textContent = isLoading ? copy.news.loading : copy.news.loadMore;
     countNode.textContent = isLoading ? '...' : `+${count}`;
   }
 
@@ -176,7 +179,7 @@ export function initNewsFeed() {
 
     isLoading = true;
     setBatchDisabled(true);
-    setStatus('Ricezione delle ultime news in corso…');
+    setStatus(copy.news.statusLoading);
     updateLoadMoreButton();
 
     if (showSkeletons) {
@@ -185,27 +188,24 @@ export function initNewsFeed() {
 
     try {
       const { stories, failedIds } = await fetchStoriesByIds(batch.items);
-      const newsItems = stories.map((story) => NewsFactory.create(story));
+      const newsItems = stories.map((story) => NewsFactory.create(story, language));
 
       clearSkeletons(newsList);
-      renderNews(newsList, newsItems, renderedCount);
+      renderNews(newsList, newsItems, renderedCount, copy);
 
       currentIndex = batch.nextIndex;
       renderedCount += newsItems.length;
       updateCounters();
 
       if (failedIds.length) {
-        setStatus(
-          `${failedIds.length} news non sono state recuperate. Il feed continua con i dati disponibili.`,
-          'warning',
-        );
+        setStatus(copy.news.statusPartial(failedIds.length), 'warning');
       } else {
-        setStatus('Feed aggiornato.', 'success');
+        setStatus(copy.news.statusUpdated, 'success');
       }
     } catch (error) {
       clearSkeletons(newsList);
-      setStatus('Connessione interrotta. Impossibile recuperare questo blocco di news.', 'error');
-      console.error('Errore durante il caricamento delle news:', error);
+      setStatus(copy.news.statusConnectionError, 'error');
+      console.error('Error while loading news:', error);
     } finally {
       isLoading = false;
       setBatchDisabled(false);
@@ -224,7 +224,7 @@ export function initNewsFeed() {
     updateCounters();
     updateLoadMoreButton();
 
-    setStatus('Connessione a Hacker News…');
+    setStatus(copy.news.statusConnecting);
     renderSkeletons(newsList, 3);
 
     try {
@@ -233,7 +233,7 @@ export function initNewsFeed() {
 
       if (storyIds.length === 0) {
         clearSkeletons(newsList);
-        setStatus('Nessuna news disponibile in questo momento.', 'warning');
+        setStatus(copy.news.statusEmpty, 'warning');
         return;
       }
 
@@ -241,8 +241,8 @@ export function initNewsFeed() {
     } catch (error) {
       clearSkeletons(newsList);
       retryButton.hidden = false;
-      setStatus('Hacker News non risponde. Controlla la connessione e riprova.', 'error');
-      console.error('Errore durante l\'inizializzazione del feed:', error);
+      setStatus(copy.news.statusUnavailable, 'error');
+      console.error('Error while initializing the feed:', error);
     }
   }
 

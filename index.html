@@ -1,19 +1,24 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Tongue: tech news da Hacker News, informazione digitale ed eventi dedicati a sostenibilità e community."
+      content="Tongue: tech news from Hacker News, digital information and events focused on sustainability and community."
     />
     <meta name="theme-color" content="#0D0208" />
-    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Tongue // Tech News</title>
   </head>
   <body>
-    <nav id="site-nav" class="site-nav" aria-label="Navigazione principale">
+    <nav
+      id="site-nav"
+      class="site-nav"
+      aria-label="Main navigation"
+      data-i18n-aria="nav.mainAria"
+    >
       <div class="site-nav__inner">
         <div class="site-nav__side site-nav__side--left">
           <span class="nav-status nav-status--live">
@@ -21,26 +26,66 @@
             <span>LIVE FEED</span>
           </span>
 
-          <a class="nav-brand" href="#home" aria-label="Tongue - torna alla home">
+          <a
+            class="nav-brand"
+            href="#home"
+            aria-label="Tongue - back to home"
+            data-i18n-aria="nav.brandAria"
+          >
             <img src="/img/tongue-logo.png" alt="" width="1845" height="437" />
           </a>
         </div>
 
-        <div class="site-nav__links" aria-label="Sezioni del sito">
+        <div
+          class="site-nav__links"
+          aria-label="Site sections"
+          data-i18n-aria="nav.sectionsAria"
+        >
           <a class="site-nav__link is-active" href="#home" data-section="home">HOME</a>
-          <a class="site-nav__link" href="#about" data-section="about">CHI SIAMO</a>
-          <a class="site-nav__link" href="#events" data-section="events">EVENTI</a>
+          <a
+            class="site-nav__link"
+            href="#about"
+            data-section="about"
+            data-i18n="nav.about"
+          >ABOUT US</a>
+          <a
+            class="site-nav__link"
+            href="#events"
+            data-section="events"
+            data-i18n="nav.events"
+          >EVENTS</a>
         </div>
 
         <div class="site-nav__side site-nav__side--right">
+          <span
+            class="language-switcher language-switcher--nav"
+            aria-label="Choose language"
+            data-i18n-aria="nav.languageAria"
+          >
+            <a
+              class="language-switcher__link"
+              href="#"
+              data-language="en"
+            >EN</a>
+            <span class="language-switcher__separator" aria-hidden="true">/</span>
+            <a
+              class="language-switcher__link"
+              href="#"
+              data-language="it"
+            >IT</a>
+          </span>
+
           <span class="nav-status nav-status--signal">SIGNAL ONLINE</span>
+
           <a
             class="instagram-link"
             href="https://www.instagram.com/"
             target="_blank"
             rel="noreferrer noopener"
-            aria-label="Apri Instagram - link dimostrativo"
-            title="Link Instagram dimostrativo"
+            aria-label="Open Instagram - demo link"
+            title="Demo Instagram link"
+            data-i18n-aria="nav.instagramAria"
+            data-i18n-title="nav.instagramTitle"
           >
             <img
               src="/img/instagram-logo.png"
@@ -77,9 +122,8 @@
           </div>
         </div>
 
-        <p class="hero__lede">
-          Le ultime notizie dal mondo tech, recuperate da Hacker News e ordinate in un feed
-          essenziale, veloce e sempre aggiornato.
+        <p class="hero__lede" data-i18n="hero.lede">
+          The latest tech news, pulled from Hacker News and organized in a clean, fast and constantly updated feed.
         </p>
 
         <div class="hero__rule" aria-hidden="true">
@@ -92,7 +136,7 @@
           <div class="feed__header">
             <div>
               <p class="section-label">// LATEST TRANSMISSIONS</p>
-              <h2 id="feed-heading">Ultime news</h2>
+              <h2 id="feed-heading" data-i18n="news.heading">Latest news</h2>
             </div>
 
             <div class="feed-status" aria-live="polite">
@@ -109,7 +153,8 @@
             <section
               id="news-list"
               class="news-list"
-              aria-label="Elenco delle ultime notizie tech"
+              aria-label="List of the latest tech news"
+              data-i18n-aria="news.listAria"
             ></section>
           </div>
 
@@ -120,7 +165,11 @@
                 <span class="load-more__count">+10</span>
               </button>
 
-              <div class="batch-control" aria-label="Numero di news da caricare">
+              <div
+                class="batch-control"
+                aria-label="Number of news items to load"
+                data-i18n-aria="news.batchAria"
+              >
                 <label class="batch-control__label" for="news-batch-size">
                   <span>BATCH</span>
                   <strong class="batch-control__limit">MAX 50</strong>
@@ -132,7 +181,11 @@
                   <option value="custom">CUSTOM</option>
                 </select>
                 <div id="news-custom-wrap" class="batch-control__custom" hidden>
-                  <label class="sr-only" for="news-custom-size">Numero personalizzato di news</label>
+                  <label
+                    class="sr-only"
+                    for="news-custom-size"
+                    data-i18n="news.customAria"
+                  >Custom number of news items</label>
                   <input
                     id="news-custom-size"
                     class="batch-control__input"
@@ -157,37 +210,31 @@
         <section id="about" class="content-section page-section" aria-labelledby="about-heading">
           <div class="section-heading section-heading--left">
             <p class="section-label">// WHO WE ARE</p>
-            <h2 id="about-heading">Chi siamo</h2>
+            <h2 id="about-heading" data-i18n="about.heading">About us</h2>
           </div>
 
           <article class="about-card panel-card">
             <div class="about-card__marker" aria-hidden="true">01</div>
             <div class="about-card__content">
-              <p>
-                Tongue nasce su Instagram dall'incontro tra una giornalista e lo YouTuber
-                <strong>Simon Lanches</strong>, con l'obiettivo di rendere l'informazione più immediata,
-                comprensibile e accessibile. Quello che inizialmente era un progetto editoriale social è
-                cresciuto fino a diventare una vera azienda, oggi composta da oltre 50 collaboratori.
+              <p data-i18n="about.p1">
+                Tongue started on Instagram from the meeting between a journalist and YouTuber Simon Lanches, with the goal of making information more immediate, understandable and accessible. What began as a social editorial project grew into a real company, now made up of more than 50 collaborators.
               </p>
               <p>
-                Il cuore del progetto è una comunicazione diretta, veloce ma completa. I temi più
-                rilevanti dell'attualità vengono trasformati in contenuti pensati per essere fruiti con
-                facilità, senza perdere il contesto. La community di Tongue conta quasi 3 milioni di
-                follower su
-                <a
+                <span data-i18n="about.p2a">At the heart of the project is direct, fast yet complete communication. The most relevant current topics are turned into content designed to be easy to consume without losing context. Tongue has a community of almost 3 million followers on </span><a
                   class="inline-link"
                   href="https://www.instagram.com/"
                   target="_blank"
                   rel="noreferrer noopener"
-                >Instagram ↗</a>, e ogni settimana ospita esperti, professionisti e organizzazioni per
-                approfondire innovazione, sostenibilità ambientale e impatto sociale.
+                >Instagram ↗</a><span data-i18n="about.p2b">, and every week it hosts experts, professionals and organizations to explore innovation, environmental sustainability and social impact.</span>
               </p>
-              <p>
-                L'attività di Tongue non si ferma allo schermo: incontri, conferenze, iniziative
-                sostenibili e swap party trasformano la community digitale in partecipazione reale.
+              <p data-i18n="about.p3">
+                Tongue does not stop at the screen: meetings, conferences, sustainable initiatives and swap parties turn the digital community into real-world participation.
               </p>
 
-              <a class="section-cta" href="#events">SCOPRI GLI EVENTI <span aria-hidden="true">→</span></a>
+              <a class="section-cta" href="#events">
+                <span data-i18n="about.cta">DISCOVER EVENTS</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
         </section>
@@ -196,7 +243,7 @@
           <div class="section-heading">
             <div>
               <p class="section-label">// FROM FEED TO REAL LIFE</p>
-              <h2 id="events-heading">Eventi</h2>
+              <h2 id="events-heading" data-i18n="events.heading">Events</h2>
             </div>
             <p class="section-heading__note">ONLINE / LIVE / COMMUNITY</p>
           </div>
@@ -204,21 +251,17 @@
           <div class="events-intro-grid">
             <article class="panel-card info-card">
               <p class="info-card__eyebrow">TONGUE EVENTS</p>
-              <h3>Informazione che diventa esperienza.</h3>
-              <p>
-                Tongue porta i temi della propria community anche fuori dai social, organizzando eventi
-                online e dal vivo dedicati a impatto sociale, sostenibilità e partecipazione collettiva.
-                Talk, incontri con esperti e iniziative plastic-free trasformano informazione e
-                consapevolezza in esperienze concrete.
+              <h3 data-i18n="events.introTitle">Information becomes experience.</h3>
+              <p data-i18n="events.introText">
+                Tongue brings the topics discussed by its community beyond social media, organizing online and live events focused on social impact, sustainability and collective participation. Talks, meetings with experts and plastic-free initiatives turn information and awareness into concrete experiences.
               </p>
             </article>
 
             <article class="panel-card info-card info-card--feature">
               <p class="info-card__eyebrow">FEATURED FORMAT</p>
               <h3>Swap Party</h3>
-              <p>
-                Gli Swap Party di Tongue sono eventi dedicati allo scambio di vestiti e oggetti di
-                seconda mano: nuova vita a ciò che già esiste, meno sprechi e più socialità.
+              <p data-i18n="events.featureText">
+                Tongue Swap Parties are events dedicated to exchanging second-hand clothes and objects: giving new life to what already exists, reducing waste and creating more opportunities to connect.
               </p>
             </article>
           </div>
@@ -226,7 +269,7 @@
           <div class="events-list-heading">
             <div>
               <p class="section-label">// UPCOMING SESSIONS</p>
-              <h3>Prossimi eventi</h3>
+              <h3 data-i18n="events.upcoming">Upcoming events</h3>
             </div>
             <span>
               <strong id="events-loaded-count">05</strong>
@@ -236,7 +279,12 @@
             </span>
           </div>
 
-          <div id="events-list" class="events-list" aria-label="Elenco dei prossimi eventi"></div>
+          <div
+            id="events-list"
+            class="events-list"
+            aria-label="List of upcoming events"
+            data-i18n-aria="events.listAria"
+          ></div>
 
           <div class="feed-actions events-actions">
             <div class="load-more-panel">
@@ -245,7 +293,11 @@
                 <span class="load-more__count">+10</span>
               </button>
 
-              <div class="batch-control" aria-label="Numero di eventi da caricare">
+              <div
+                class="batch-control"
+                aria-label="Number of events to load"
+                data-i18n-aria="events.batchAria"
+              >
                 <label class="batch-control__label" for="events-batch-size">
                   <span>BATCH</span>
                   <strong class="batch-control__limit">MAX 50</strong>
@@ -257,7 +309,11 @@
                   <option value="custom">CUSTOM</option>
                 </select>
                 <div id="events-custom-wrap" class="batch-control__custom" hidden>
-                  <label class="sr-only" for="events-custom-size">Numero personalizzato di eventi</label>
+                  <label
+                    class="sr-only"
+                    for="events-custom-size"
+                    data-i18n="events.customAria"
+                  >Custom number of events</label>
                   <input
                     id="events-custom-size"
                     class="batch-control__input"
@@ -277,8 +333,27 @@
       </main>
 
       <footer class="site-footer">
-        <div>
-          <strong>TONGUE</strong>
+        <div class="site-footer__brand">
+          <div class="site-footer__brand-top">
+            <strong>TONGUE</strong>
+            <span
+              class="language-switcher language-switcher--footer"
+              aria-label="Choose language"
+              data-i18n-aria="nav.languageAria"
+            >
+              <a
+                class="language-switcher__link"
+                href="#"
+                data-language="en"
+              >EN</a>
+              <span class="language-switcher__separator" aria-hidden="true">/</span>
+              <a
+                class="language-switcher__link"
+                href="#"
+                data-language="it"
+              >IT</a>
+            </span>
+          </div>
           <span>TECH NEWS / EVENTS / COMMUNITY</span>
         </div>
         <div class="site-footer__links">
@@ -294,7 +369,9 @@
             rel="noreferrer noopener"
           >INSTAGRAM ↗</a>
         </div>
-        <span class="site-footer__copyright">© 2026 TONGUE - DEMO PROJECT</span>
+        <span class="site-footer__copyright" data-i18n="footer.copyright">
+          © 2026 TONGUE - DEMO PROJECT
+        </span>
       </footer>
     </div>
 

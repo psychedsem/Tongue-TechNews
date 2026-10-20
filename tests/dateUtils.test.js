@@ -9,8 +9,16 @@ describe('formatUnixDate', () => {
     expect(formatted).toMatch(/giu/i);
   });
 
-  it('handles missing or invalid values', () => {
+  it('formats the same timestamp in English when requested', () => {
+    const formatted = formatUnixDate(1717243200, 'en');
+
+    expect(formatted).toContain('2024');
+    expect(formatted).toMatch(/jun/i);
+  });
+
+  it('handles missing or invalid values in both languages', () => {
     expect(formatUnixDate(null)).toBe('Data non disponibile');
     expect(formatUnixDate('not-a-date')).toBe('Data non disponibile');
+    expect(formatUnixDate(null, 'en')).toBe('Date unavailable');
   });
 });

@@ -2,6 +2,12 @@ import * as Sentry from '@sentry/browser';
 
 import '../css/style.css';
 import { initEventsFeed } from './events.js';
+import {
+  applyStaticTranslations,
+  buildLanguagePath,
+  ensureLocalizedPath,
+  getCopy,
+} from './i18n.js';
 import { initNewsFeed } from './news.js';
 
 if (import.meta.env.VITE_SENTRY_DSN) {
@@ -30,6 +36,7 @@ function initNavigation() {
   }
 
   function updateNavOnScroll() {
+    nav.classList.toggle('is-language-hidden', window.scrollY > 8);
     nav.classList.toggle('is-scrolled', window.scrollY > 120);
   }
 
@@ -56,6 +63,24 @@ function initNavigation() {
   sections.forEach((section) => observer.observe(section));
 }
 
+function initLanguageSwitcher() {
+  const languageLinks = [...document.querySelectorAll('[data-language]')];
+
+  languageLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const activeSection =
+        document.querySelector('.site-nav__link.is-active')?.dataset.section || 'home';
+
+      window.location.href = buildLanguagePath(
+        link.dataset.language,
+        `#${activeSection}`,
+      );
+    });
+  });
+}
+
 let toastTimer;
 let hideToastTimer;
 
@@ -78,8 +103,16 @@ function showDemoToast(message) {
   }, 3200);
 }
 
-initNavigation();
-initNewsFeed();
-initEventsFeed((event) => {
-  showDemoToast(`Demo UI - la registrazione a “${event.title}” non è collegata a un backend.`);
-});
+const language = ensureLocalizedPath();
+
+if (language) {
+  const copy = getCopy(language);
+
+  applyStaticTranslations(language);
+  initNavigation();
+  initLanguageSwitcher();
+  initNewsFeed();
+  initEventsFeed((event) => {
+    showDemoToast(copy.toast.registration(event.title));
+  });
+}
